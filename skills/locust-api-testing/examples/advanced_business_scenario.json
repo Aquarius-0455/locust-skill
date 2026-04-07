@@ -1,0 +1,63 @@
+{
+  "name": "电商核心交易链路 (Advanced Usage Demo)",
+  "concurrency": {
+    "users": 100,
+    "spawn_rate": 10,
+    "run_time": "5m"
+  },
+  "host": "https://api.enterprise-demo.com",
+  "headers": {
+    "User-Agent": "Locust-AI-Agent/1.0",
+    "Content-Type": "application/json",
+    "x-tenant-id": "TENANT_8899"
+  },
+  "targets": [
+    {
+      "name": "1_获取首页商品推荐",
+      "url": "/v2/recommendations?limit=20&scene=home",
+      "method": "GET",
+      "weight": 5
+    },
+    {
+      "name": "2_用户静默登录 (独立Header覆盖)",
+      "url": "https://auth.enterprise-demo.com/oauth/token",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Basic Y2xpZW50X2lkOmNsaWVudF9zZWNyZXQ="
+      },
+      "data": "grant_type=client_credentials&scope=read",
+      "weight": 1
+    },
+    {
+      "name": "3_提交创建订单 (复杂嵌套 JSON)",
+      "url": "/v1/orders/create",
+      "method": "POST",
+      "headers": {
+        "Authorization": "Bearer fake_jwt_token_for_load_test"
+      },
+      "json": {
+        "sku_id": "SKU_00129",
+        "quantity": 2,
+        "payment": {
+          "channel": "alipay",
+          "currency": "CNY"
+        },
+        "shipping_address": {
+          "province": "Guangdong",
+          "city": "Shenzhen"
+        }
+      },
+      "weight": 2
+    },
+    {
+      "name": "4_取消过期订单 (PUT 方法演示)",
+      "url": "/v1/orders/cancel/ORDER_9999",
+      "method": "PUT",
+      "json": {
+        "reason": "timeout_auto_cancel"
+      },
+      "weight": 1
+    }
+  ]
+}

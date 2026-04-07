@@ -1,0 +1,28 @@
+{
+  "name": "JWT Auth API Load Test",
+  "concurrency": {
+    "users": 50,
+    "spawn_rate": 5,
+    "run_time": "1m"
+  },
+  "host": "https://api.example.com",
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "authorization": "Bearer <YOUR_JWT_TOKEN_HERE>",
+    "user-agent": "LocustAssistant/1.0"
+  },
+  "targets": [
+    {
+      "name": "Member Profile Info",
+      "url": "https://api.example.com/v1/user/profile",
+      "method": "GET",
+      "weight": 10
+    },
+    {
+      "name": "Balance Inquiry",
+      "url": "https://api.example.com/v1/user/balance",
+      "method": "GET",
+      "weight": 3
+    }
+  ]
+}

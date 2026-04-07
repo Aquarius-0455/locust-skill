@@ -1,0 +1,36 @@
+{
+  "name": "Baidu Subsystems S-Code Test (Demo)",
+  "concurrency": {
+    "users": 20,
+    "spawn_rate": 2,
+    "run_time": "30s"
+  },
+  "host": "https://www.baidu.com",
+  "headers": {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AI-Agentic-Client"
+  },
+  "targets": [
+    {
+      "name": "baidu_homepage",
+      "url": "/",
+      "method": "GET",
+      "weight": 2
+    },
+    {
+      "name": "baidu_finance",
+      "url": "https://finance.baidu.com/stock/hk-09888",
+      "method": "GET",
+      "weight": 1
+    },
+    {
+      "name": "post_example_json",
+      "url": "https://api.baidu.com/v1/data",
+      "method": "POST",
+      "json": {
+        "query": "something",
+        "timestamp": 123456789
+      },
+      "weight": 1
+    }
+  ]
+}

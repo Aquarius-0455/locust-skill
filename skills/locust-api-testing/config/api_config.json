@@ -1,0 +1,32 @@
+{
+  "name": "Generic API Load Test",
+  "concurrency": {
+    "users": 100,
+    "spawn_rate": 10,
+    "run_time": "2m"
+  },
+  "host": "https://jsonplaceholder.typicode.com",
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "user-agent": "LocustAssistant/1.0"
+  },
+  "targets": [
+    {
+      "name": "Get Posts",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "method": "GET",
+      "weight": 10
+    },
+    {
+      "name": "Submit Post",
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "method": "POST",
+      "json": {
+        "title": "foo",
+        "body": "bar",
+        "userId": 1
+      },
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "name": "Locust Skill for Claude Code",
+  "description": "Professional-grade API load testing and performance engineering suite.",
+  "version": "1.1.0",
+  "capabilities": {
+    "scripts": {
+      "path": "skills/locust-api-testing/scripts"
+    },
+    "docs": {
+      "skill_path": "skills/locust-api-testing/SKILL.md",
+      "reference_path": "skills/locust-api-testing/REFERENCE.md"
+    },
+    "config": {
+      "path": "skills/locust-api-testing/config"
+    }
+  },
+  "author": "Aquarius-0455",
+  "homepage": "https://github.com/Aquarius-0455/locust-skill"
+}

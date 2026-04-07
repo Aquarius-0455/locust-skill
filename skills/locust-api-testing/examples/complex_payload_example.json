@@ -1,0 +1,37 @@
+{
+  "name": "Order Submission Load Test",
+  "concurrency": {
+    "users": 20,
+    "spawn_rate": 2,
+    "run_time": "2m"
+  },
+  "host": "https://api.example.com",
+  "headers": {
+    "content-type": "application/json",
+    "authorization": "Bearer <YOUR_TOKEN_HERE>"
+  },
+  "targets": [
+    {
+      "name": "Composite Order Post",
+      "url": "https://api.example.com/api/v1/orders/create",
+      "method": "POST",
+      "json": {
+        "orderId": "ORD-{{timestamp}}",
+        "items": [
+          {"skuId": "SKU001", "quantity": 2, "price": 99.9},
+          {"skuId": "SKU002", "quantity": 1, "price": 45.0}
+        ],
+        "shipping": {
+          "address": "No.123 Sample St",
+          "city": "CyberCity",
+          "zipCode": "100010"
+        },
+        "metadata": {
+          "source": "locust-load-tester",
+          "isTest": true
+        }
+      },
+      "weight": 1
+    }
+  ]
+}
